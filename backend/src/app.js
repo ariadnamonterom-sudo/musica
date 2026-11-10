@@ -1,29 +1,25 @@
 import express from "express";
-import cors from "cors"
+import cors from "cors";
 import { logger } from "./middleware/logger.js";
-import musicaRouter from "./routes/musica.routes.js"; 
-
+import musicaRouter from "./routes/musica.routes.js";
 
 const app = express();
-const PORT = 3000;
+const PRODUCCION = process.env.NODE_ENV === "production";
 
-app.use(
-  cors({ origin: ["http://localhost:5173", "http://localhost:4173"] })
-);
-app.use(express.json()); 
-app.use(logger);    
+const origenes = process.env.FRONTEND_URL
+  ? process.env.FRONTEND_URL.split(",").map((o) => o.trim())
+  : ["http://localhost:5173", "http://localhost:4173"];
 
-
-
-app.use("/api", musicaRouter); 
+app.use(cors({ origin: origenes }));
+app.use(express.json());
+app.use(logger);
 
 
 app.get("/", (req, res) => {
-  res.json({
-    nombre: "API de Música y Artistas",
-    estado: "funcionando"
-  });
+  res.json({ estado: "ok", servicio: "api-musica" });
 });
+
+app.use("/api", musicaRouter);
 
 
 app.use((req, res) => {
@@ -32,6 +28,16 @@ app.use((req, res) => {
   });
 });
 
+
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({
+    error: PRODUCCION ? "Error interno del servidor" : err.message
+  });
+});
+
+const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
-  console.log(`Servidor iniciado en http://localhost:${PORT}`);
+  console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
