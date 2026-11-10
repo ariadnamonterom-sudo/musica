@@ -17,6 +17,6 @@ Express, Prisma, SQLite · React, Vite · Git, GitHub, Render
 Ver backend/.env.example y frontend/.env.example (sin valores secretos).
 
 ## Despliegue
-- Frontend: https://...onrender.com
-- API:      https://...onrender.com
+- Frontend:https://musica-web-1kqx.onrender.com
+- API:     https://musica-api-fs0l.onrender.com/
 - Nota: la base de datos SQLite del plan gratuito es efímera.
