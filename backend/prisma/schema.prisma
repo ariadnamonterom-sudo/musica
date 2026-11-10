@@ -1,0 +1,31 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+ 
+}
+
+model Artista {
+  id        Int       @id @default(autoincrement())
+  nombre    String    @unique
+  genero    String
+  canciones Cancion[]
+}
+
+model Cancion {
+  id        Int      @id @default(autoincrement())
+  titulo    String
+  duracion  Int      
+  favorita  Boolean  @default(false)
+  anio      Int?
+  artistaId Int
+  artista   Artista  @relation(fields: [artistaId], references: [id])
+}
