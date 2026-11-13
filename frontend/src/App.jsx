@@ -139,7 +139,7 @@ function App() {
         </section>
       )}
 
-      {cargando && <p>Cargando catálogo desde el servidor</p>}
+      {cargando && <p>Cargando catálogo desde el servidor...</p>}
 
       {!cargando && errorCarga && (
         <div role="alert" className="aviso aviso-error">
