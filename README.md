@@ -10,8 +10,8 @@ Express, Prisma, SQLite · React, Vite · Git, GitHub, Render
 - frontend/  Interfaz React + Vite
 
 ## Ejecución en local
-Backend: copiar backend/.env.example a backend/.env, npm install, npx prisma migrate dev, npm run dev
-Frontend: copiar frontend/.env.example a frontend/.env, npm install, npm run dev
+-Backend: copiar backend/.env.example a backend/.env, npm install, npx prisma migrate dev, npm run dev
+-Frontend: copiar frontend/.env.example a frontend/.env, npm install, npm run dev
 
 ## Variables de entorno
 Ver backend/.env.example y frontend/.env.example (sin valores secretos).
